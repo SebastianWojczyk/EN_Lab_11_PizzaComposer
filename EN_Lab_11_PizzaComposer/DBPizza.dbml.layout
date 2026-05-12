@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DBPizza">
+  <DataContextMoniker Name="/DBPizzaDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0732ae87-0330-44c2-93ff-16a9c350209b" absoluteBounds="3.5, 1, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/DBPizzaDataContext/Ingerdient" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6045cf29-44a6-46bc-8a3b-ef00d149c40f" absoluteBounds="3.515, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6b05a83e-44df-4a1d-b155-24aea288e312" absoluteBounds="0.75, 0.875, 2, 1.5785953776041664">
+      <DataClassMoniker Name="/DBPizzaDataContext/Pizza" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c3b87a53-2f4e-42e0-8e1d-65d613dac0cc" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.69314697265625); (3.5 : 1.69314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBPizzaDataContext/Pizza/Pizza_Ingerdient" />
+      <nodes>
+        <classShapeMoniker Id="6b05a83e-44df-4a1d-b155-24aea288e312" />
+        <classShapeMoniker Id="0732ae87-0330-44c2-93ff-16a9c350209b" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

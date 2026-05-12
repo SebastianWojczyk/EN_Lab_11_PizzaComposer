@@ -41,6 +41,7 @@ namespace EN_Lab_11_PizzaComposer
             this.label4 = new System.Windows.Forms.Label();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.listBoxPizzas = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // textBoxName
@@ -155,11 +156,21 @@ namespace EN_Lab_11_PizzaComposer
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // listBoxPizzas
+            // 
+            this.listBoxPizzas.FormattingEnabled = true;
+            this.listBoxPizzas.Location = new System.Drawing.Point(40, 56);
+            this.listBoxPizzas.Name = "listBoxPizzas";
+            this.listBoxPizzas.Size = new System.Drawing.Size(235, 290);
+            this.listBoxPizzas.TabIndex = 12;
+            this.listBoxPizzas.SelectedIndexChanged += new System.EventHandler(this.listBoxPizzas_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBoxPizzas);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.label4);
@@ -193,6 +204,7 @@ namespace EN_Lab_11_PizzaComposer
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.ListBox listBoxPizzas;
     }
 }
 

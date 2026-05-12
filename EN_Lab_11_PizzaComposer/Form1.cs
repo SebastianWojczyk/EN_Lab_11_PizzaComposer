@@ -36,6 +36,15 @@ namespace EN_Lab_11_PizzaComposer
         public Form1()
         {
             InitializeComponent();
+            //property Name goes to the list in application (list contains Pizza objects)
+            listBoxPizzas.DisplayMember = "Name";
+
+            readDB();
+        }
+
+        private void readDB()
+        {
+            listBoxPizzas.Items.AddRange(db.Pizzas.ToArray());
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
@@ -89,6 +98,38 @@ namespace EN_Lab_11_PizzaComposer
 
             db.Pizzas.InsertOnSubmit(pizza);
             db.SubmitChanges();
+        }
+
+        private void listBoxPizzas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(listBoxPizzas.SelectedItem is Pizza)
+            {
+                Pizza pizza = listBoxPizzas.SelectedItem as Pizza;
+
+                textBoxName.Text = pizza.Name;
+
+                switch (pizza.Size)
+                {
+                    case 'S': radioButtonSizeS.Checked = true; break;
+                    case 'M': radioButtonSizeM.Checked = true; break;
+                    case 'L': radioButtonSizeL.Checked = true; break;
+                    case 'U':
+                        radioButtonSizeS.Checked = false;
+                        radioButtonSizeM.Checked = false;
+                        radioButtonSizeL.Checked = false;
+                        break;
+                }
+
+                checkBoxSauce.Checked = pizza.Sauce;
+
+                flowLayoutPanelIngedients.Controls.Clear();
+                foreach(Ingerdient i in pizza.Ingerdients)
+                {
+                    TextBox tb = new TextBox();
+                    tb.Text = i.Name;
+                    flowLayoutPanelIngedients.Controls.Add(tb);
+                }
+            }
         }
     }
 }

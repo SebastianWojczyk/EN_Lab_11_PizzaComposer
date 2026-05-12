@@ -52,7 +52,7 @@ namespace EN_Lab_11_PizzaComposer
 
             string pizza = $"Name: {name}\n\nSize: {size}\n\nSouce: {sauce}\n\nIngredients: {ingredients}";
 
-            MessageBox.Show(pizza);
+            MessageBox.Show(pizza, "Order");
         }
     }
 }

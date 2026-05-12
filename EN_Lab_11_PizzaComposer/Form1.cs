@@ -44,6 +44,7 @@ namespace EN_Lab_11_PizzaComposer
 
         private void readDB()
         {
+            listBoxPizzas.Items.Clear();
             listBoxPizzas.Items.AddRange(db.Pizzas.ToArray());
         }
 
@@ -56,48 +57,97 @@ namespace EN_Lab_11_PizzaComposer
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            Pizza pizza = new Pizza();
+            showMessageBox();
 
-            string name = textBoxName.Text;
+            Pizza pizza;
+            //update
+            if (listBoxPizzas.SelectedItem is Pizza)
+            {
+                //object from db
+                pizza = listBoxPizzas.SelectedItem as Pizza;
+
+                //delete old ingredients
+                db.Ingerdients.DeleteAllOnSubmit(pizza.Ingerdients);
+            }
+            //insert
+            else
+            {
+                //new Pizza object
+                pizza = new Pizza();
+                db.Pizzas.InsertOnSubmit(pizza);
+            }
+
             pizza.Name = textBoxName.Text;
 
-            string size = "Undefined";
             pizza.Size = 'U';
             if (radioButtonSizeS.Checked)
             {
-                size = "Small";
                 pizza.Size = 'S';
             }
-            else if(radioButtonSizeM.Checked)
+            else if (radioButtonSizeM.Checked)
             {
-                size = "Medium";
                 pizza.Size = 'M';
             }
-            else if(radioButtonSizeL.Checked)
+            else if (radioButtonSizeL.Checked)
             {
-                size = "Large";
                 pizza.Size = 'L';
             }
 
-            string sauce = checkBoxSauce.Checked ? "Yes" : "No";
             pizza.Sauce = checkBoxSauce.Checked ? true : false;
 
-            string ingredients = "";
-            foreach(TextBox tb in flowLayoutPanelIngedients.Controls)
+            foreach (TextBox tb in flowLayoutPanelIngedients.Controls)
             {
-                ingredients += tb.Text + ", ";
                 Ingerdient ingredient = new Ingerdient();
                 ingredient.Name = tb.Text;
-                
+
                 pizza.Ingerdients.Add(ingredient);
                 //ingredient.Pizza = pizza;
             }
 
+            db.SubmitChanges();
+
+            clearForm();
+            readDB();
+        }
+
+        private void clearForm()
+        {
+            textBoxName.Text = "";
+            radioButtonSizeS.Checked = false;
+            radioButtonSizeM.Checked = false;
+            radioButtonSizeL.Checked = false;
+            checkBoxSauce.Checked = false;
+            flowLayoutPanelIngedients.Controls.Clear();
+        }
+
+        private void showMessageBox()
+        {
+            string name = textBoxName.Text;
+
+            string size = "Undefined";
+            if (radioButtonSizeS.Checked)
+            {
+                size = "Small";
+            }
+            else if (radioButtonSizeM.Checked)
+            {
+                size = "Medium";
+            }
+            else if (radioButtonSizeL.Checked)
+            {
+                size = "Large";
+            }
+
+            string sauce = checkBoxSauce.Checked ? "Yes" : "No";
+
+            string ingredients = "";
+            foreach (TextBox tb in flowLayoutPanelIngedients.Controls)
+            {
+                ingredients += tb.Text + ", ";
+            }
             string pizzaDescription = $"Name: {name}\n\nSize: {size}\n\nSouce: {sauce}\n\nIngredients: {ingredients}";
             MessageBox.Show(pizzaDescription, "Order");
 
-            db.Pizzas.InsertOnSubmit(pizza);
-            db.SubmitChanges();
         }
 
         private void listBoxPizzas_SelectedIndexChanged(object sender, EventArgs e)

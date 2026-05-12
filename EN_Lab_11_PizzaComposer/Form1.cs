@@ -8,6 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+/*
+
+CREATE TABLE [dbo].[Pizza]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(50) NOT NULL, 
+    [Size] NCHAR(1) NOT NULL, 
+    [Sauce] BIT NOT NULL
+)
+
+CREATE TABLE [dbo].[Ingerdient]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] NVARCHAR(50) NOT NULL, 
+    [PizzaId] INT NOT NULL, 
+    CONSTRAINT [FK_Ingerdient_Pizza] FOREIGN KEY ([PizzaId]) REFERENCES [Pizza]([Id])
+)
+
+*/
 namespace EN_Lab_11_PizzaComposer
 {
     public partial class Form1 : Form

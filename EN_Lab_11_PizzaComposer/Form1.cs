@@ -31,6 +31,8 @@ namespace EN_Lab_11_PizzaComposer
 {
     public partial class Form1 : Form
     {
+        DBPizzaDataContext db = new DBPizzaDataContext();
+
         public Form1()
         {
             InitializeComponent();
@@ -45,33 +47,48 @@ namespace EN_Lab_11_PizzaComposer
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            Pizza pizza = new Pizza();
+
             string name = textBoxName.Text;
+            pizza.Name = textBoxName.Text;
 
             string size = "Undefined";
-            if(radioButtonSizeS.Checked)
+            pizza.Size = 'U';
+            if (radioButtonSizeS.Checked)
             {
                 size = "Small";
+                pizza.Size = 'S';
             }
             else if(radioButtonSizeM.Checked)
             {
                 size = "Medium";
+                pizza.Size = 'M';
             }
             else if(radioButtonSizeL.Checked)
             {
                 size = "Large";
+                pizza.Size = 'L';
             }
 
             string sauce = checkBoxSauce.Checked ? "Yes" : "No";
+            pizza.Sauce = checkBoxSauce.Checked ? true : false;
 
             string ingredients = "";
             foreach(TextBox tb in flowLayoutPanelIngedients.Controls)
             {
                 ingredients += tb.Text + ", ";
+                Ingerdient ingredient = new Ingerdient();
+                ingredient.Name = tb.Text;
+                
+                pizza.Ingerdients.Add(ingredient);
+                //ingredient.Pizza = pizza;
             }
 
-            string pizza = $"Name: {name}\n\nSize: {size}\n\nSouce: {sauce}\n\nIngredients: {ingredients}";
+            string pizzaDescription = $"Name: {name}\n\nSize: {size}\n\nSouce: {sauce}\n\nIngredients: {ingredients}";
+            MessageBox.Show(pizzaDescription, "Order");
 
-            MessageBox.Show(pizza, "Order");
+            db.Pizzas.InsertOnSubmit(pizza);
+            db.SubmitChanges();
         }
     }
 }
